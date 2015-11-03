@@ -36,7 +36,7 @@ def add_git_segment():
         return
 
     if out:
-        branch = out[len('refs/heads/'):].rstrip()
+        branch = u'\uE0A0 ' + out[len('refs/heads/'):].rstrip()
     else:
         branch = '(Detached)'
 
