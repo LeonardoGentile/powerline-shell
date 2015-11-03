@@ -55,3 +55,6 @@ SEGMENTS = [
 
 # Change the colors used to draw individual segments in your prompt
 THEME = 'default'
+
+# BRANCH_SYMBOL = u'\uE0A0 '
+# BRANCH_SYMBOL = ''

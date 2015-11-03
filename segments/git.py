@@ -1,6 +1,12 @@
 import re
 import subprocess
 
+try:
+    import config
+    branch_symbol = config.BRANCH_SYMBOL
+except:
+    branch_symbol = ''
+
 def get_git_status():
     has_pending_commits = True
     has_untracked_files = False
@@ -36,7 +42,7 @@ def add_git_segment():
         return
 
     if out:
-        branch = u'\uE0A0 ' + out[len('refs/heads/'):].rstrip()
+        branch = branch_symbol + out[len('refs/heads/'):].rstrip()
     else:
         branch = '(Detached)'
 
