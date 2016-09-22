@@ -1,44 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-from __future__ import print_function
-
-import argparse
-import os
-import sys
-
-py3 = sys.version_info.major == 3
-
-
-def warn(msg):
-    print('[powerline-bash] ', msg)
-
-
-if py3:
-    def unicode(x):
-        return x
-
 
 class Powerline:
-    symbols = {
-        'compatible': {
-            'lock': 'RO',
-            'network': 'SSH',
-            'separator': u'\u25B6',
-            'separator_thin': u'\u276F'
-        },
-        'patched': {
-            'lock': u'\uE0A2',
-            'network': u'\uE0A2',
-            'separator': u'\uE0B0',
-            'separator_thin': u'\uE0B1'
-        },
-        'flat': {
-            'lock': '',
-            'network': '',
-            'separator': '',
-            'separator_thin': ''
-        },
-    }
+
+    symbols = Symbol.symbols['generic']
 
     color_templates = {
         'bash': '\\[\\e%s\\]',
@@ -97,15 +60,7 @@ class Powerline:
 
 
 class RepoStats:
-    symbols = {
-        'detached': u'\u2693',
-        'ahead': u'\u2B06',
-        'behind': u'\u2B07',
-        'staged': u'\u2714',
-        'not_staged': u'\u270E',
-        'untracked': u'\u2753',
-        'conflicted': u'\u273C'
-    }
+    symbols = Symbol.symbols['repo']
 
     def __init__(self):
         self.ahead = 0

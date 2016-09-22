@@ -76,7 +76,7 @@ def add_git_segment(powerline):
     if branch_info:
         stats.ahead = branch_info["ahead"]
         stats.behind = branch_info["behind"]
-        branch = branch_info['local']
+        branch = u'{}{}{}'.format(RepoStats.symbols.get('branch', ''), ' ' if 'branch' in RepoStats.symbols else '', branch_info['local'])
     else:
         branch = _get_git_detached_branch()
 

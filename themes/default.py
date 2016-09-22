@@ -62,3 +62,47 @@ class Color(DefaultColor):
     Because the segments require a 'Color' class for every theme.
     """
     pass
+
+class DefaultSymbol:
+    """
+    This class should have the default symbol for every segment.
+    Please test every new segment with this theme first.
+    """
+    symbols = {
+        'generic': {
+            'compatible': {
+                'lock': 'RO',
+                'network': 'SSH',
+                'separator': u'\u25B6',
+                'separator_thin': u'\u276F'
+            },
+            'patched': {
+                'lock': u'\uE0A2',
+                'network': u'\uE0A2',
+                'separator': u'\uE0B0',
+                'separator_thin': u'\uE0B1'
+            },
+            'flat': {
+                'lock': '',
+                'network': '',
+                'separator': '',
+                'separator_thin': ''
+            }
+        },
+        'repo' : {
+            'detached': u'\u2693',
+            'ahead': u'\u2B06',
+            'behind': u'\u2B07',
+            'staged': u'\u2714',
+            'not_staged': u'\u270E',
+            'untracked': u'\u2753',
+            'conflicted': u'\u273C'
+        }
+    }
+
+class Symbol(DefaultSymbol):
+    """
+    This subclass is required when the user chooses to use 'default' theme.
+    Because the segments require a 'Symbol' class for every theme.
+    """
+    pass

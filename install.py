@@ -11,6 +11,7 @@ except ImportError:
     shutil.copyfile('config.py.dist', 'config.py')
     import config
 
+IMPORTS_FILE = 'powerline_shell_base_imports.py'
 TEMPLATE_FILE = 'powerline_shell_base.py'
 OUTPUT_FILE = 'powerline-shell.py'
 SEGMENTS_DIR = 'segments'
@@ -24,11 +25,13 @@ def load_source(srcfile):
         return ''
 
 if __name__ == "__main__":
-    source = load_source(TEMPLATE_FILE)
+    source = load_source(IMPORTS_FILE)
     source += load_source(os.path.join(THEMES_DIR, 'default.py'))
 
     if config.THEME != 'default':
         source += load_source(os.path.join(THEMES_DIR, config.THEME + '.py'))
+
+    source += load_source(TEMPLATE_FILE)
 
     for segment in config.SEGMENTS:
         source += load_source(os.path.join(SEGMENTS_DIR, segment + '.py'))
