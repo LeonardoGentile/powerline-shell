@@ -61,6 +61,7 @@ class Powerline:
 
 class RepoStats:
     symbols = Symbol.symbols['repo']
+    count = Symbol.count
 
     def __init__(self):
         self.ahead = 0
@@ -96,18 +97,23 @@ class RepoStats:
         """
         return unicode(self[_key]) if int(self[_key]) > 1 else u''
 
-    def add_to_powerline(self, powerline, color):
-        def add(_key, fg, bg):
-            if self[_key]:
-                s = u" {}{} ".format(self.n_or_empty(_key), self.symbols[_key])
-                powerline.append(s, fg, bg)
-        add('ahead', color.GIT_AHEAD_FG, color.GIT_AHEAD_BG)
-        add('behind', color.GIT_BEHIND_FG, color.GIT_BEHIND_BG)
-        add('staged', color.GIT_STAGED_FG, color.GIT_STAGED_BG)
-        add('not_staged', color.GIT_NOTSTAGED_FG, color.GIT_NOTSTAGED_BG)
-        add('untracked', color.GIT_UNTRACKED_FG, color.GIT_UNTRACKED_BG)
-        add('conflicted', color.GIT_CONFLICTED_FG, color.GIT_CONFLICTED_BG)
 
+    def add_to_git_segment(self, segment, git_sections):
+        """ Given a (git) segment, add to it some git_section, then return just one single segment """
+        for sub_segment in git_sections:
+            if self[sub_segment]:
+                segment += u" {}{}".format(self.n_or_empty(sub_segment) if self.count else '', self.symbols[sub_segment])
+        return segment
+
+
+    def add_to_powerline(self, git_sections, powerline, color):
+        """Given some git_sections, add them as separate segments"""
+        for section in git_sections:
+            if self[section]:
+                s = u" {}{} ".format(self.n_or_empty(section) if self.count else '', self.symbols[section])
+                fg = getattr(color, 'GIT_' + section.upper() + '_FG')
+                bg = getattr(color, 'GIT_' + section.upper() + '_BG')
+                powerline.append(s, fg, bg)
 
 def get_valid_cwd():
     """ We check if the current working directory is valid or not. Typically

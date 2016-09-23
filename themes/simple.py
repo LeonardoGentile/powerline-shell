@@ -35,15 +35,15 @@ class Symbol(DefaultSymbol):
         },
         'repo' : {
             'branch': u'\uE0A0',        # branch symbol
-            'detached': u'\u2693',      #
-            'ahead': u'\u2B06',         #
-            'behind': u'\u2B07',
+            'detached': u'\u2693',
+            'ahead': u'\u21E1',
+            'behind': u'\u21E3',
             'staged': u'\u2714',
             'not_staged': u'\u270E',    # pencil
-            # 'untracked': u'\u2753',
-            'untracked': u'\u2363',
-            # 'untracked': u'\u2618',
+            'untracked': '+',
             'conflicted': u'\u273C'
-            # 'conflicted': u'\u2694'
         }
     }
+
+    # Show Count Statics on modified/added files
+    count = False

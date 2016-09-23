@@ -2,6 +2,7 @@ import re
 import subprocess
 import os
 
+
 def get_PATH():
     """Normally gets the PATH from the OS. This function exists to enable
     easily mocking the PATH in tests.
@@ -56,7 +57,8 @@ def parse_git_stats(status):
     return stats
 
 
-def add_git_segment(powerline):
+
+def add_git_simple_segment(powerline):
     try:
         p = subprocess.Popen(['git', 'status', '--porcelain', '-b'],
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -86,5 +88,10 @@ def add_git_segment(powerline):
         bg = Color.REPO_DIRTY_BG
         fg = Color.REPO_DIRTY_FG
 
+
+    # Segment composed of sub-segments (git)
+    branch = stats.add_to_git_segment(branch, ['untracked', 'conflicted'])
     powerline.append(' %s ' % branch, fg, bg)
-    stats.add_to_powerline(['ahead', 'behind', 'staged', 'not_staged', 'untracked', 'conflicted'], powerline, Color)
+
+    # Separated single git sub-segments
+    stats.add_to_powerline(['ahead', 'behind'], powerline, Color)

@@ -46,8 +46,8 @@ class DefaultColor:
     GIT_BEHIND_FG = 250
     GIT_STAGED_BG = 22
     GIT_STAGED_FG = 15
-    GIT_NOTSTAGED_BG = 130
-    GIT_NOTSTAGED_FG = 15
+    GIT_NOT_STAGED_BG = 130
+    GIT_NOT_STAGED_FG = 15
     GIT_UNTRACKED_BG = 52
     GIT_UNTRACKED_FG = 15
     GIT_CONFLICTED_BG = 9
@@ -99,6 +99,9 @@ class DefaultSymbol:
             'conflicted': u'\u273C'
         }
     }
+
+    # Show Count Statics on modified/added files
+    count = True
 
 class Symbol(DefaultSymbol):
     """

@@ -33,6 +33,9 @@ SEGMENTS = [
 # Show the current git branch and status
     'git',
 
+# Or in alternative:
+    # 'git_simple',
+
 # Show the current mercurial branch and status
     'hg',
 
@@ -55,6 +58,3 @@ SEGMENTS = [
 
 # Change the colors used to draw individual segments in your prompt
 THEME = 'default'
-
-# BRANCH_SYMBOL = u'\uE0A0 '
-# BRANCH_SYMBOL = ''
