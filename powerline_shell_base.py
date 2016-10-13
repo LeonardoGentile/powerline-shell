@@ -84,7 +84,7 @@ class RepoStats:
     def __getitem__(self, _key):
         return getattr(self, _key)
 
-    def n_or_empty(self, _key):
+    def n_or_empty(self, _key, always_show_n=False):
         """Given a string name of one of the properties of this class, returns
         the value of the property as a string when the value is greater than
         1. When it is not greater than one, returns an empty string.
@@ -95,22 +95,25 @@ class RepoStats:
 
             segment = repo_stats.n_or_empty("untracked") + icon_string
         """
-        return unicode(self[_key]) if int(self[_key]) > 1 else u''
+        if always_show_n:
+            return unicode(self[_key])
+        else:
+            return unicode(self[_key]) if int(self[_key]) > 1 else u''
 
 
-    def add_to_git_segment(self, segment, git_sections):
+    def add_to_git_segment(self, segment, git_sections, always_show_n=False):
         """ Given a (git) segment, add to it some git_section, then return just one single segment """
         for sub_segment in git_sections:
             if self[sub_segment]:
-                segment += u" {}{}".format(self.n_or_empty(sub_segment) if self.count else '', self.symbols[sub_segment])
+                segment += u" {}{}".format(self.n_or_empty(sub_segment, always_show_n) if self.count else '', self.symbols[sub_segment])
         return segment
 
 
-    def add_to_powerline(self, git_sections, powerline, color):
+    def add_to_powerline(self, git_sections, powerline, color, always_show_n=False):
         """Given some git_sections, add them as separate segments"""
         for section in git_sections:
             if self[section]:
-                s = u" {}{} ".format(self.n_or_empty(section) if self.count else '', self.symbols[section])
+                s = u" {}{} ".format(self.n_or_empty(section, always_show_n), self.symbols[section])
                 fg = getattr(color, 'GIT_' + section.upper() + '_FG')
                 bg = getattr(color, 'GIT_' + section.upper() + '_BG')
                 powerline.append(s, fg, bg)

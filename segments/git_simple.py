@@ -94,4 +94,4 @@ def add_git_simple_segment(powerline):
     powerline.append(' %s ' % branch, fg, bg)
 
     # Separated single git sub-segments
-    stats.add_to_powerline(['ahead', 'behind'], powerline, Color)
+    stats.add_to_powerline(['ahead', 'behind'], powerline, Color, True) # always show num even if 1
